@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101d26"><title>BONE LAB 3D v5 | 밝은 배경 · 깔끔한 학습 화면</title>
+<style>
+:root{--bg:#2a3f49;--panel:#243944;--panel2:#2d4650;--border:#48606a;--text:#f2f4ef;--muted:#b5c5c9;--accent:#d6ecb0;--gold:#efc887;--red:#f59f93;--blue:#a2d5ec;--radius:18px}*{box-sizing:border-box}html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Noto Sans KR",sans-serif;color:var(--text);background:var(--bg)}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}button:disabled{opacity:.4;cursor:not-allowed}a{color:var(--accent)}#app{height:100dvh;min-height:620px;display:flex;flex-direction:column}.header{min-height:70px;display:flex;align-items:center;padding:12px 24px;border-bottom:1px solid var(--border);justify-content:space-between;gap:16px;background:#20323a;z-index:10}.logo{display:flex;gap:13px;align-items:center}.mark{width:40px;height:40px;border:1px solid #90a39a;border-radius:12px;color:var(--accent);display:grid;place-items:center;font-size:22px}.brand{font-size:19px;letter-spacing:.12em;font-weight:800}.brand small{display:block;letter-spacing:.1em;font-size:10px;color:#cad5d8;margin-top:2px;font-weight:600}.topnav{display:flex;gap:7px}.topnav button{border:0;color:#d2dbdc;background:transparent;padding:11px 16px;border-radius:10px;font-size:13px;font-weight:700}.topnav button.on{background:#d6ecb0;color:#14221c}.count{font-size:12px;color:#eef1ee;border:1px solid #61757c;background:#30454e;border-radius:40px;padding:9px 13px}.workspace{flex:1;min-height:0;display:grid;grid-template-columns:300px minmax(350px,1fr) 310px}.left,.right{min-height:0;overflow-y:auto;scrollbar-color:#718890 transparent}.left{background:var(--panel);border-right:1px solid var(--border);padding:23px 18px 18px}.right{background:var(--panel);border-left:1px solid var(--border);padding:25px 23px}.eyebrow{font-size:10px;letter-spacing:.2em;color:var(--gold);font-weight:800}.left h2{font-size:22px;line-height:1.25;margin:8px 0 6px}.muted{color:var(--muted)}.small{font-size:12px}.search{width:100%;border:1px solid #647983;background:#1b2d36;color:white;border-radius:11px;padding:12px 14px;outline:0;margin-top:19px}.search::placeholder{color:#99aab0}.regionbar{display:flex;flex-wrap:wrap;gap:7px;margin:17px 0}.chip{background:transparent;border:1px solid #60757d;border-radius:30px;padding:7px 11px;font-size:11px;color:#dce4e5}.chip.on{background:#d6ecb0;border-color:#d6ecb0;color:#14221c;font-weight:800}.term-list{display:flex;flex-direction:column;gap:5px}.grouphead{font-size:10px;color:#a8bcc2;letter-spacing:.12em;font-weight:800;margin:18px 0 8px}.term{display:flex;text-align:left;align-items:center;width:100%;gap:12px;background:transparent;border:1px solid transparent;color:#eef1ea;border-radius:11px;padding:11px 9px}.term:hover{background:#314850}.term.on{background:#39535a;border-color:#8aa796}.term-index{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;background:#324750;color:#bfd0d7;font-size:10px;flex-shrink:0}.term.on .term-index{background:var(--accent);color:#1c2b23}.term-name{font-size:13px;font-weight:700;line-height:1.3;overflow-wrap:anywhere}.term-sub{font-size:11px;color:#c0cdd2;margin-top:3px}.done-dot{font-size:12px;color:var(--accent);margin-left:auto}.main{min-width:0;position:relative;overflow:hidden;background:radial-gradient(ellipse at 48% 34%,#ffffff 0%,#eef4f6 38%,#dde7eb 100%)}#viewport{position:absolute;inset:0}#viewport canvas{width:100%;height:100%;display:block;touch-action:none}.mainhead{pointer-events:none;position:absolute;left:16px;top:14px;right:auto;z-index:2;display:flex;align-items:flex-start;gap:8px}.scene-title{font-family:Georgia,'Times New Roman',serif;font-size:21px;font-style:italic;color:#30424a}.scene-sub{font-size:10px;color:#6f858d;margin-top:4px}.scene-pill{font-size:10px;color:#2f4c3e;border:1px solid #a3b6ad;padding:7px 10px;border-radius:35px;background:#f7fbf8d4}.viewer-bottom{pointer-events:none;position:absolute;left:16px;right:16px;bottom:16px;display:flex;justify-content:space-between;align-items:end;gap:10px;z-index:3}.view-hint{font-size:10px;color:#51656c;background:#fbfcfcd6;border:1px solid #c5d3d8;border-radius:10px;padding:8px 11px;max-width:250px;line-height:1.5}.tools{pointer-events:auto;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.iconbtn{height:36px;min-width:36px;border-radius:10px;background:#f8fbfcde;color:#294049;border:1px solid #b9c9ce;padding:0 11px;font-size:12px;font-weight:700}.iconbtn:hover{background:#ffffff}.loading{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;flex-direction:column;gap:13px;pointer-events:none;text-align:center;padding:25px}.loading strong{font-family:Georgia,serif;font-size:32px;color:#30424a;font-weight:500}.loading p{font-size:12px;max-width:300px;line-height:1.8;color:#60757d;margin:0}.loader{height:4px;width:180px;border-radius:8px;overflow:hidden;background:#c7d6db}.loader b{height:100%;display:block;background:#91b19a;width:5%;transition:width .2s}.loading.off{display:none}.side-top{display:flex;justify-content:space-between;align-items:center;gap:10px}.mini{font-size:10px;letter-spacing:.1em;color:#93a7aa}.big-en{font-size:34px;letter-spacing:-.04em;line-height:1.07;margin:13px 0 10px;overflow-wrap:anywhere}.ko{font-size:14px;color:#9bb1b3}.divider{border-top:1px solid #344751;margin:24px 0}.subject{font-size:12px;color:#e3c58e;letter-spacing:.06em;font-weight:750;margin-bottom:12px}.group-name{font-size:13px;color:#a9babe;margin:9px 0 14px}.primary{width:100%;border:0;border-radius:12px;background:var(--accent);color:#12251c;padding:13px 16px;font-weight:850;font-size:13px}.secondary{width:100%;border:1px solid #4a626a;border-radius:12px;background:#21323d;color:#edf3ee;padding:12px 16px;font-weight:750;font-size:12px}.secondary:hover{border-color:var(--accent)}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.switchline{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:12px;color:#b6c5c8}.toggle{appearance:none;position:relative;width:39px;height:23px;flex-shrink:0;background:#41545e;border-radius:99px;cursor:pointer}.toggle:checked{background:#9ac0a2}.toggle:after{content:'';position:absolute;width:17px;height:17px;top:3px;left:3px;background:white;border-radius:50%;transition:.15s}.toggle:checked:after{left:19px}.progress{height:7px;border-radius:9px;background:#31424b;overflow:hidden;margin:10px 0}.progress>div{height:100%;background:var(--accent);width:0;transition:.2s}.metric{display:flex;justify-content:space-between;font-size:12px;color:#abbcbd}.metric b{color:#ecf4ed}.footnote{font-size:10px;color:#758f98;line-height:1.6;margin-top:24px}.feedback{min-height:21px;font-size:12px;margin:11px 0 0}.feedback.ok{color:var(--accent)}.feedback.bad{color:var(--red)}.answer{width:100%;padding:13px 14px;background:#091720;color:white;border-radius:11px;border:1px solid #48616a;font-size:17px;outline:0}.answer:focus{border-color:var(--accent)}.quiz-card{padding:15px;background:#1b313b;border:1px solid #354a52;border-radius:14px}.question-ko{color:var(--accent);font-size:19px;font-weight:800;margin:7px 0 16px}.quiz-number{font-size:11px;color:var(--gold)}.qmode{display:flex;gap:6px;margin:14px 0 23px}.qmode button{flex:1;border:1px solid #3a5059;border-radius:10px;padding:10px 4px;background:#1b2c35;color:#a9bdc0;font-weight:700;font-size:11px}.qmode button.on{color:#1e3124;background:#d6ecb0;border-color:#d6ecb0}.empty{padding:24px 10px;text-align:center;color:#91a8b0;font-size:13px;line-height:1.7}.outline{font-size:11px;color:var(--gold);padding:8px 10px;background:#2a3335;border-radius:8px;display:inline-block}.label-target{font-size:12px;color:#9db2b5;padding:12px;background:#1a2c34;border-radius:10px;margin-top:13px}.bookmark{color:var(--accent);border:1px solid #4d6d66;background:transparent;font-size:12px;border-radius:8px;padding:8px}.notice{font-size:11px;color:#c3d1d2;background:#1b333a;border:1px solid #34535b;padding:10px 12px;border-radius:10px;margin-top:12px;line-height:1.5}.hintblock{padding:9px 0 0;font-size:11px;color:#8ba2aa}.find-prompt{font-size:14px;color:#dbeade;line-height:1.6;margin-bottom:14px}.quiz-action{margin-top:13px;display:flex;gap:8px}.quiz-action button{flex:1}.reveal{font-size:13px;color:var(--accent);padding:12px 0}.test-title{font-size:12px;color:#dfbd7d;font-weight:800;letter-spacing:.09em}.subtle{color:#70878f;font-size:10px}.none{display:none!important}#model-fallback{display:none;margin-top:10px}#model-fallback a{color:var(--accent)}.viewmode{display:flex;gap:7px;margin-top:14px}.viewmode button{border:1px solid #738a92;border-radius:9px;color:#eef3f2;background:#324953;font-size:11px;padding:10px 13px}.viewmode button.on{color:#12201d;background:#d6ecb0;border-color:#d6ecb0}.explore-only{}.test-only{display:none}.mistakes-only{display:none}@media(max-width:1130px){.workspace{grid-template-columns:235px minmax(320px,1fr) 275px}.left{padding:18px 12px}.right{padding:22px 15px}.big-en{font-size:29px}.mainhead{left:18px;top:20px}}@media(max-width:780px){#app{height:100%;min-height:100dvh}.header{padding:11px 13px;min-height:61px}.brand{font-size:15px}.mark{width:34px;height:34px;font-size:17px}.topnav button{padding:8px 11px;font-size:11px}.count{display:none}.workspace{display:flex;flex-direction:column;overflow:visible}.left{order:2;min-height:unset;max-height:none;overflow:visible;padding:20px 15px}.main{order:1;min-height:55vh;height:55vh}.right{order:3;overflow:visible;padding:20px 16px;border-left:0;border-top:1px solid var(--border)}.left h2{font-size:20px}.term-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px}.grouphead{grid-column:1/-1;margin-bottom:1px}.term{padding:8px 6px}.term-name{font-size:12px}.term-sub{font-size:10px}.term-index{width:21px;height:21px}.mainhead{top:15px;left:15px;right:15px}.scene-title{font-size:21px}.scene-pill{font-size:9px}.viewer-bottom{bottom:12px;left:12px;right:12px}.view-hint{font-size:9px;padding:8px;max-width:155px}.iconbtn{min-width:30px;height:33px;padding:0 8px;font-size:11px}.big-en{font-size:33px}.loading strong{font-size:25px}}@media(max-width:390px){.term-list{grid-template-columns:1fr}.logo{gap:7px}.brand{font-size:13px}.topnav button{padding:8px 7px}}
+
+#landmark-layer{position:absolute;inset:0;pointer-events:none;z-index:5;overflow:hidden}
+.landmark-callout{position:absolute;pointer-events:none;min-width:90px;max-width:205px;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;filter:drop-shadow(0 2px 9px #000a);transition:opacity .18s;}
+.landmark-name{padding:8px 12px;border:1px solid #efcb8d;background:#142730f2;color:#f3efdf;border-radius:10px;font-size:12px;font-weight:800;text-align:center;line-height:1.22;max-width:205px;word-break:break-word}
+.landmark-korean{display:block;margin-top:3px;font-weight:500;font-size:10px;color:#b9c7c3}
+.landmark-line{height:23px;width:2px;background:#eac17e}
+.landmark-dot{height:20px;width:20px;background:#efc681;box-shadow:0 0 0 4px #f2c98130,0 0 0 1px #fff7e7;border:4px solid #101d25;border-radius:50%}
+.landmark-callout.is-manual .landmark-line{background:#c6edac}.landmark-callout.is-manual .landmark-dot{background:#c6edac;box-shadow:0 0 0 4px #c6edac30}
+.landmark-callout.is-unverified .landmark-name{border-style:dashed}
+.pin-status{color:#cfe6d4;background:#1a3437;border-left:3px solid #a2c799;border-radius:6px;padding:9px 11px;margin-top:10px;line-height:1.5;font-size:11px}
+.pin-status.warning{background:#33332b;border-left-color:#eac17e;color:#f2d5a3}
+.legend{margin-top:10px;color:#819aa1;font-size:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.legend-dot{display:inline-block;width:10px;height:10px;background:#efc681;border-radius:50%}.legend-dot.manual{background:#c6edac;margin-left:14px}
+@media(max-width:780px){.landmark-name{font-size:11px;max-width:160px;padding:6px 8px}.landmark-line{height:16px}.landmark-dot{height:17px;width:17px}.landmark-callout{max-width:175px}}
+
+
+/* Bone-by-bone recall: clear study index, genuine isolation, readable landmarks */
+.source-link{display:inline-block;margin-top:10px;font-size:11px;color:#afceb2;text-decoration:underline;text-underline-offset:3px}.source-link[hidden]{display:none}
+.bone-select-label{display:block;margin:20px 0 7px;color:var(--gold);font-size:10px;font-weight:800;letter-spacing:.12em}
+.bone-select{width:100%;background:#1c3039;color:#f6f4e8;border:1px solid #577078;border-radius:10px;padding:12px;font-size:14px;font-weight:750;cursor:pointer}
+.bone-caption{color:#b3c4c7;font-size:11px;margin:12px 0;line-height:1.5;min-height:17px}
+.bone-title{font-size:12px;letter-spacing:.05em;font-weight:800;color:#e9c992;margin:11px 6px}
+.term{border-bottom:1px solid #253743}.term-index{font-size:11px;font-variant-numeric:tabular-nums}.term.on .term-index{font-weight:900}
+.term.is-sub{padding-left:14px}.term.is-bone{background:#1a2a34;border:1px solid #3c515a}
+.scene-modes{display:none!important}
+.scene-modes button{border:0;color:#cedddc;background:transparent;border-radius:9px;padding:10px 13px;font-weight:750;font-size:12px}
+.scene-modes button.on{background:#d6ecb0;color:#183024;font-weight:900}
+.viewmode button{flex:1;white-space:nowrap;padding:10px 5px}
+.memory-tip{background:#172b34;border-left:3px solid #8daea2;padding:13px 14px;margin:12px 0;border-radius:7px;font-size:12px;line-height:1.6;color:#d5e2df}
+.memory-tip span{display:block;font-size:10px;font-weight:800;letter-spacing:.1em;color:#e6ca99;margin-bottom:6px}
+.study-nav{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.study-nav button{padding:12px 8px}
+.landmark-callout.is-auto .landmark-name{border-style:dashed}
+.landmark-callout.is-auto .landmark-name:after{content:' · 참고';font-weight:550;font-size:10px;color:#e4bba7}
+@media(max-width:780px){.main{height:58vh;min-height:400px}.mainhead{top:10px;left:10px}.viewer-bottom{bottom:7px;flex-direction:column;align-items:stretch}.view-hint{max-width:none;display:none}.tools{justify-content:center;gap:5px}.iconbtn{padding:0 7px;min-width:31px}.term-list{display:flex;flex-direction:column}.bone-caption{margin-top:11px}}
+@media(min-width:781px) and (max-width:1080px){}
+
+/* v4 - Actual mesh is always verified and named, never replaced with another bone */
+.bone-switcher{display:none!important}
+.bone-switcher strong{font-size:11px;font-weight:800;color:#d4f0d9;text-align:center;white-space:normal;line-height:1.4;flex:1;min-width:0;word-break:break-word}
+.bone-switcher button{font-size:11px;font-weight:800;background:#253c46;border:1px solid #48636b;border-radius:8px;color:#e8f5ee;white-space:nowrap;padding:9px 11px;cursor:pointer;flex-shrink:0}
+.bone-switcher button:hover,.bone-switcher button:focus{background:#365462}
+.model-problem{position:absolute;z-index:6;top:44%;left:50%;transform:translate(-50%,-50%);width:min(340px,calc(100% - 28px));border:1px solid #d8bda0;background:#fff9f3f2;color:#4a4035;border-radius:15px;padding:22px 19px;text-align:center;box-shadow:0 9px 34px #7f8f9638}
+.model-problem[hidden]{display:none!important}
+.model-problem b{font-size:16px;line-height:1.5}
+.model-problem p{font-size:12px;line-height:1.65;color:#736a61}
+.model-problem a{display:inline-block;margin-top:5px;font-size:12px;color:#d6ecb0;text-decoration:underline}
+@media(max-width:780px){}
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"}}</script>
+</head>
+<body>
+<div id="app">
+<header class="header"><div class="logo"><div class="mark">✳</div><div class="brand">BONE LAB<small>v5 · LIGHTER STUDY UI</small></div></div><nav class="topnav" aria-label="학습 모드"><button data-tab="explore" class="on">학습</button><button data-tab="test">시험</button><button data-tab="mistakes">오답</button></nav><div class="count" id="header-count">0 / 0 learned</div></header>
+<div class="workspace">
+<aside class="left"><div class="eyebrow">CHAPTER 06 · BONE STUDY</div><h2>한 뼈씩, 확실하게.</h2>
+<div class="muted small">첫 버전처럼 번호 순서대로 골라 외워요.<br>영어 의학용어가 먼저 나옵니다.</div>
+<input class="search" id="search" placeholder="전체 뼈 · 돌기 · 구멍 검색" aria-label="용어 검색">
+<div class="regionbar" id="regionbar"></div>
+<label for="bone-select" class="bone-select-label">SELECT A BONE · 암기할 뼈</label>
+<select class="bone-select" id="bone-select" aria-label="암기할 뼈 선택"></select>
+<div id="bone-caption" class="bone-caption"></div><div class="term-list" id="terms"></div></aside>
+<section class="main" aria-label="회전 가능한 3D 인체 골격"><div id="viewport"></div><div id="landmark-layer" aria-live="polite"></div><div class="mainhead"><div><div class="eyebrow">INTERACTIVE MODEL</div><div class="scene-title" id="scene-title">Whole skeleton</div><div class="scene-sub" id="scene-sub">Rotate · Zoom · Select</div></div><div class="scene-pill" id="model-state">3D model loading</div></div>
+<div class="scene-modes" aria-label="3D 보기 방식"><button data-view="whole">🦴 전신 위치</button><button data-view="near">주변 보기</button><button data-view="solo" class="on">◎ 이 뼈만</button></div>
+<div class="bone-switcher"><button id="prev-bone" title="이전 뼈 3D">◀ 이전 뼈</button><strong id="current-model-bone" role="status">Scapula · 모델 확인 중</strong><button id="next-bone" title="다음 뼈 3D">다음 뼈 ▶</button></div>
+<div id="model-problem" class="model-problem" role="alert" hidden><b id="model-problem-title">이 뼈의 3D 자료를 확인할 수 없습니다.</b><p id="model-problem-note">다른 뼈를 대신 표시하지 않습니다. 원본 자료와 연결 상태를 확인하세요.</p><a href="https://charleeh.github.io/ecorche/" target="_blank" rel="noopener noreferrer">원본 3D 전체 모형 보기</a></div>
+<div class="loading" id="loading"><strong>Discover the bones</strong><p id="loading-msg">어깨뼈뿐 아니라 모든 뼈가 들어 있는 원본 3D 모델을 불러오는 중이에요. 인터넷 연결이 필요합니다.</p><div class="loader"><b id="loadbar"></b></div><div id="model-fallback">모델에 연결할 수 없습니다. <a href="https://charleeh.github.io/ecorche/" target="_blank" rel="noopener noreferrer">원본 3D 보기</a></div></div><div class="viewer-bottom"><div class="view-hint" id="view-hint">드래그: 회전 · 휠/두 손가락: 확대<br>전신 → 위치 확인 · 단독 → 뼈 모양 암기</div><div class="tools"><button class="iconbtn" id="front">앞쪽</button><button class="iconbtn" id="back">뒤쪽</button><button class="iconbtn" id="side">가쪽</button><button class="iconbtn" id="home">전신</button><button class="iconbtn" id="zoom-in">＋</button><button class="iconbtn" id="zoom-out">－</button></div></div></section>
+<aside class="right"><section id="explore-panel"><div class="side-top"><span class="eyebrow" id="structure-pos">STRUCTURE 01 / 12</span><button class="bookmark" id="bookmark">☆ 저장</button></div><h1 class="big-en" id="detail-name">Scapula</h1><div class="ko" id="detail-ko">어깨뼈</div><div class="divider"></div><div class="subject">어디에 있나요? · LOCATION</div><div class="group-name" id="parent-name">Shoulder &amp; arm</div>
+<div class="label-target" id="location-note">먼저 뼈의 전체 모양을 관찰하세요.</div>
+<div class="memory-tip"><span>기억할 단서</span><div id="memory-note">뼈를 앞·뒤로 돌려 위치를 기억해 보세요.</div></div>
+<a id="source-link" href="https://www.ncbi.nlm.nih.gov/books/NBK538319/" target="_blank" rel="noopener noreferrer" class="source-link">해부학 원문과 대조하기 ↗</a>
+<div id="pin-status" role="status" class="pin-status">3D 모델 연결 확인 중</div><div class="bone-caption">보기 전환은 여기서 조절하고, 가운데 화면은 최대한 넓게 보이도록 정리했어요.</div>
+<div class="viewmode"><button id="whole-mode">전신</button><button id="near-mode">주변</button><button id="detail-mode" class="on">이 뼈만 보기</button></div><div class="divider"></div><div class="switchline"><label for="hide-en">영어 용어 가리기</label><input type="checkbox" id="hide-en" class="toggle"></div><div style="height:15px"></div><button class="secondary" id="reveal-en">영어 이름 확인</button><div style="height:9px"></div><button class="secondary" id="set-pin">✎ 3D 위치 핀 직접 수정</button><div class="notice" id="pin-note">주황색 표시가 있다면 위치 참고용이며, 정확한 해부학적 경계를 뜻하지 않습니다.</div><button class="secondary" id="reset-pin" style="margin-top:8px">↺ 내가 찍은 핀 지우기</button><div class="legend"><span class="legend-dot"></span> 대략적인 참고 핀 <span class="legend-dot manual"></span> 내가 찍은 핀</div><div class="divider"></div><div class="metric"><span>암기 완료</span><b id="learn-progress">0 / 0</b></div><div class="progress"><div id="progress-bar"></div></div><div style="height:10px"></div><button class="primary" id="learned">✓ 이 부위를 익혔어요</button>
+<div class="study-nav"><button class="secondary" id="prev-structure">← 이전 부위</button><button class="secondary" id="next-structure">다음 부위 →</button></div>
+<div class="hintblock">전신으로 <b>위치</b>를 먼저 확인하고, 단독 모형으로 <b>형태</b>를 외워 보세요. 작은 구멍·홈은 3D 모델에 표현되지 않았을 수 있어요. 학습 기록은 이 브라우저에 저장됩니다.</div></section>
+<section id="test-panel" class="none"><div class="eyebrow">PRACTICE MODE</div><h2 style="font-size:25px;line-height:1.3;margin:10px 0">Test your recall.</h2><p class="muted small" style="line-height:1.5">해당 위치를 보고 영어 의학용어를 직접 입력하세요.</p><div class="qmode"><button data-qmode="typing" class="on">영어 입력</button><button data-qmode="finding">3D 뼈 찾기</button></div><div class="quiz-card"><div class="quiz-number" id="qnum">QUESTION 01</div><div class="question-ko" id="q-ko">어깨뼈</div><div class="find-prompt" id="q-prompt"></div><div id="typing-ui"><input id="answer" class="answer" placeholder="Type the full English term" autocomplete="off" autocapitalize="off" spellcheck="false"><div class="quiz-action"><button class="primary" id="grade">정답 확인</button></div></div><div id="finding-ui" class="none"><div class="notice">3D 모형에서 해당 <b>뼈</b>를 클릭하세요. 돌기·구멍의 세부 위치는 영어 입력 모드로 복습합니다.</div></div><div class="feedback" id="q-feedback"></div><button class="secondary" style="margin-top:8px" id="show-answer">정답 보기</button><button class="secondary" style="margin-top:8px" id="next">다음 문제 →</button></div><div class="hintblock" style="margin-top:15px">정답은 영어 풀네임 기준입니다. 대소문자는 구분하지 않아요.</div></section>
+<section id="mistakes-panel" class="none"><div class="eyebrow">REVIEW MODE</div><h2 style="font-size:24px;margin:10px 0">Wrong answers</h2><p class="muted small">틀린 영어 명칭만 빠르게 다시 외워보세요.</p><div class="metric" style="margin:24px 0"><span>복습할 용어</span><b id="wrong-count">0</b></div><div id="wrong-list"></div><button class="primary" style="margin-top:17px" id="retry">오답만 시험 보기</button><button class="secondary" style="margin-top:9px" id="clear-wrong">오답 기록 초기화</button></section>
+<div class="footnote">BONE LAB v4 · 선택한 뼈 모형 검증 연결 · 해부학 교육용 · 정밀한 실습 모형과 대조 필수 · 3D geometry: <a href="https://github.com/Charleeh/ecorche" target="_blank" rel="noopener">Écorché / BodyParts3D / Z-Anatomy</a> · CC BY-SA 4.0. 모델의 작은 구멍·결절은 단순화된 교육용 3D 자료이며, 주황색 핀은 추정점입니다. 해부학 참고: <a href="https://www.ncbi.nlm.nih.gov/books/NBK538319/" target="_blank" rel="noopener">Scapula (NIH)</a>.</div></aside></div></div>
+<script>
+const G=[
+{id:'temporal',en:'Temporal bone',ko:'관자뼈',area:'머리뼈',match:['right temporal bone','temporal bone'],sub:[['External acoustic meatus','바깥귀길','Auditory meatus'],['Styloid process','붓돌기'],['Mastoid process','꼭지돌기']]},
+{id:'occipital',en:'Occipital bone',ko:'뒤통수뼈',area:'머리뼈',match:['occipital bone'],sub:[['Foramen magnum','큰구멍'],['Occipital condyle','뒤통수뼈관절융기'],['Hypoglossal canal','혀밑신경관']]},
+{id:'sphenoid',en:'Sphenoid bone',ko:'나비뼈',area:'머리뼈',match:['sphenoid bone','sphenoid'],sub:[['Sella turcica','터키안'],['Optic canal','시신경관'],['Foramen rotundum','원형구멍'],['Foramen ovale','타원구멍'],['Foramen spinosum','가시구멍'],['Superior orbital fissure','위눈확틈새','Orbital fissure']]},
+{id:'ethmoid',en:'Ethmoid bone',ko:'벌집뼈',area:'머리뼈',match:['ethmoid'],sub:[['Crista galli','닭볏'],['Cribriform plate','체판'],['Olfactory foramina','후각신경구멍','Olfactory foramen'],['Perpendicular plate','수직판'],['Superior nasal concha','위코선반'],['Middle nasal concha','중간코선반']]},
+{id:'atlas',en:'Atlas',ko:'고리뼈',area:'척주·가슴우리',match:['atlas'],sub:[]},
+{id:'axis',en:'Axis',ko:'중쇠뼈',area:'척주·가슴우리',match:['axis'],sub:[['Dens','치아돌기']]},
+{id:'cervical',en:'Cervical vertebra',ko:'목뼈',area:'척주·가슴우리',match:['fifth cervical vertebra','cervical vertebra'],sub:[['Vertebral arch','척추뼈고리'],['Vertebral foramen','척추뼈구멍'],['Transverse foramen','가로구멍'],['Intervertebral foramen','척추사이구멍']]},
+{id:'rib',en:'Rib',ko:'갈비뼈',area:'척주·가슴우리',match:['right fifth rib','right sixth rib','rib'],sub:[['Costal groove','갈비뼈고랑']]},
+{id:'sternum',en:'Sternum',ko:'복장뼈',area:'척주·가슴우리',match:['body of sternum','manubrium'],sub:[['Sternal angle','복장뼈각']]},
+{id:'scapula',en:'Scapula',ko:'어깨뼈',area:'어깨·팔',match:['right scapula','scapula'],sub:[['Acromion','봉우리'],['Coracoid process','부리돌기'],['Glenoid cavity','접시오목'],['Spine of scapula','어깨뼈가시'],['Supraspinous fossa','가시위오목'],['Infraspinous fossa','가시아래오목'],['Subscapular fossa','어깨밑오목'],['Superior angle','위각'],['Inferior angle','아래각'],['Medial border','안쪽모서리'],['Lateral border','가쪽모서리'],['Superior border','위모서리']]},
+{id:'humerus',en:'Humerus',ko:'위팔뼈',area:'어깨·팔',match:['right humerus','humerus'],sub:[['Greater tubercle','큰결절'],['Lesser tubercle','작은결절'],['Deltoid tuberosity','세모근거친면'],['Capitulum','작은머리'],['Trochlea','도르래']]},
+{id:'radius',en:'Radius',ko:'노뼈',area:'어깨·팔',match:['right radius','radius'],sub:[['Styloid process of radius','노뼈붓돌기','Radial styloid process']]},
+{id:'ulna',en:'Ulna',ko:'자뼈',area:'어깨·팔',match:['right ulna','ulna'],sub:[['Styloid process of ulna','자뼈붓돌기','Ulnar styloid process']]},
+{id:'hip',en:'Hip bone',ko:'볼기뼈',area:'골반',match:['right hip bone','hip bone','right coxal bone','coxal bone'],alias:'Coxal bone',sub:[['Ilium','엉덩뼈'],['Ischium','궁둥뼈'],['Pubis','두덩뼈'],['Acetabulum','절구'],['Anterior superior iliac spine','위앞엉덩뼈가시','ASIS'],['Anterior inferior iliac spine','아래앞엉덩뼈가시','AIIS'],['Iliac crest','엉덩뼈능선']]},
+{id:'femur',en:'Femur',ko:'넙다리뼈',area:'다리·발',match:['right femur','femur'],sub:[['Greater trochanter','큰돌기'],['Lesser trochanter','작은돌기']]},
+{id:'tibia',en:'Tibia',ko:'정강뼈',area:'다리·발',match:['right tibia','tibia'],sub:[['Medial malleolus','안쪽복사']]},
+{id:'fibula',en:'Fibula',ko:'종아리뼈',area:'다리·발',match:['right fibula','fibula'],sub:[['Lateral malleolus','가쪽복사']]},
+{id:'calcaneus',en:'Calcaneus',ko:'발꿈치뼈',area:'다리·발',match:['right calcaneus','calcaneus'],sub:[]}
+];
+const GUIDE = {
+ 'temporal-0':{u:[0.92,0.45,0.55],view:'side',caution:true},
+ 'temporal-1':{u:[0.77,0.1,0.73],view:'side',caution:true},
+ 'temporal-2':{u:[0.78,0.19,0.23],view:'side',caution:true},
+ 'occipital-0':{u:[0.48,0.07,0.62],view:'bottom',caution:true},
+ 'occipital-1':{u:[0.68,0.12,0.56],view:'bottom',caution:true},
+ 'occipital-2':{u:[0.59,0.16,0.58],view:'bottom',caution:true},
+ 'sphenoid-0':{u:[0.52,0.73,0.58],view:'top',caution:true},
+ 'sphenoid-1':{u:[0.52,0.75,0.91],view:'front',caution:true},
+ 'sphenoid-2':{u:[0.67,0.49,0.74],view:'front',caution:true},
+ 'sphenoid-3':{u:[0.78,0.35,0.47],view:'bottom',caution:true},
+ 'sphenoid-4':{u:[0.82,0.31,0.35],view:'bottom',caution:true},
+ 'sphenoid-5':{u:[0.56,0.65,0.78],view:'front',caution:true},
+ 'ethmoid-0':{u:[0.52,0.97,0.6],view:'top',caution:true},
+ 'ethmoid-1':{u:[0.5,0.85,0.65],view:'top',caution:true},
+ 'ethmoid-2':{u:[0.52,0.86,0.72],view:'top',caution:true},
+ 'ethmoid-3':{u:[0.49,0.33,0.72],view:'front',caution:true},
+ 'ethmoid-4':{u:[0.66,0.6,0.76],view:'front',caution:true},
+ 'ethmoid-5':{u:[0.68,0.36,0.77],view:'front',caution:true},
+ 'axis-0':{u:[0.5,0.92,0.5],view:'front',caution:true},
+ 'cervical-0':{u:[0.5,0.56,0.13],view:'back',caution:false},
+ 'cervical-1':{u:[0.5,0.55,0.52],view:'top',caution:true},
+ 'cervical-2':{u:[0.92,0.52,0.55],view:'side',caution:true},
+ 'cervical-3':{u:[0.84,0.1,0.45],view:'side',caution:true},
+ 'rib-0':{u:[0.52,0.12,0.45],view:'bottom',caution:true},
+ 'sternum-0':{u:[0.51,0.8,0.96],view:'front',caution:true},
+ 'scapula-0':{u:[0.93,0.91,0.2],view:'back',caution:false},
+ 'scapula-1':{u:[0.85,0.9,0.88],view:'front',caution:false},
+ 'scapula-2':{u:[0.98,0.64,0.51],view:'side',caution:false},
+ 'scapula-3':{u:[0.64,0.74,0.1],view:'back',caution:false},
+ 'scapula-4':{u:[0.38,0.88,0.08],view:'back',caution:false},
+ 'scapula-5':{u:[0.41,0.47,0.1],view:'back',caution:false},
+ 'scapula-6':{u:[0.5,0.48,0.91],view:'front',caution:false},
+ 'scapula-7':{u:[0.16,0.96,0.35],view:'back',caution:false},
+ 'scapula-8':{u:[0.33,0.03,0.25],view:'back',caution:false},
+ 'scapula-9':{u:[0.07,0.5,0.27],view:'back',caution:false},
+ 'scapula-10':{u:[0.94,0.38,0.31],view:'back',caution:false},
+ 'scapula-11':{u:[0.47,0.96,0.38],view:'back',caution:false},
+ 'humerus-0':{u:[0.92,0.94,0.52],view:'front',caution:false},
+ 'humerus-1':{u:[0.56,0.91,0.93],view:'front',caution:false},
+ 'humerus-2':{u:[0.87,0.57,0.82],view:'front',caution:false},
+ 'humerus-3':{u:[0.87,0.045,0.78],view:'front',caution:false},
+ 'humerus-4':{u:[0.34,0.045,0.81],view:'front',caution:false},
+ 'radius-0':{u:[0.85,0.035,0.67],view:'front',caution:false},
+ 'ulna-0':{u:[0.5,0.035,0.48],view:'back',caution:false},
+ 'hip-0':{u:[0.82,0.82,0.46],view:'front',caution:false},
+ 'hip-1':{u:[0.78,0.2,0.23],view:'back',caution:false},
+ 'hip-2':{u:[0.22,0.25,0.83],view:'front',caution:false},
+ 'hip-3':{u:[0.95,0.51,0.66],view:'side',caution:false},
+ 'hip-4':{u:[0.9,0.83,0.95],view:'front',caution:false},
+ 'hip-5':{u:[0.9,0.7,0.94],view:'front',caution:false},
+ 'hip-6':{u:[0.67,0.98,0.48],view:'top',caution:false},
+ 'femur-0':{u:[0.92,0.92,0.54],view:'front',caution:false},
+ 'femur-1':{u:[0.45,0.8,0.15],view:'back',caution:false},
+ 'tibia-0':{u:[0.18,0.04,0.59],view:'front',caution:false},
+ 'fibula-0':{u:[0.87,0.05,0.62],view:'side',caution:false}
+};
+const ANATOMY = {
+ 'temporal':{where:'머리 양쪽, 귀 주변의 머리뼈입니다.',tip:'귀 주변의 뼈에서 세부 구조를 찾으세요.'},
+ 'temporal-0':{where:'관자뼈 가쪽 면에서 귓구멍으로 이어지는 관 모양 입구입니다.',tip:'가쪽에서 귀가 있는 쪽을 보세요.'},
+ 'temporal-1':{where:'관자뼈 아래에서 길고 가늘게 아래쪽으로 뻗는 돌기입니다.',tip:'귓구멍 아래·앞쪽의 가는 돌기.'},
+ 'temporal-2':{where:'관자뼈의 귓구멍 아래·뒤쪽에 있는 두꺼운 돌기입니다.',tip:'귀 뒤쪽의 둥근 돌기.'},
+ 'occipital':{where:'두개골 뒤쪽과 아래쪽을 이루는 뼈입니다.',tip:'두개골을 아래에서 살펴보세요.'},
+ 'occipital-0':{where:'뒤통수뼈 바닥 중앙의 큰 구멍입니다. 척수가 지나갑니다.',tip:'두개골 바닥의 가장 큰 구멍.'},
+ 'occipital-1':{where:'큰구멍의 좌우에 있는 관절융기입니다. 고리뼈와 맞닿습니다.',tip:'큰구멍 양옆의 관절면.'},
+ 'occipital-2':{where:'뒤통수뼈관절융기 위·가쪽의 작은 통로로, 혀밑신경이 지납니다.',tip:'큰구멍 바로 옆이지만 매우 작은 통로.'},
+ 'sphenoid':{where:'두개골 바닥 중앙, 눈확의 뒤쪽에 놓이는 복잡한 뼈입니다.',tip:'위쪽과 바닥쪽을 번갈아 보세요.'},
+ 'sphenoid-0':{where:'나비뼈 몸통 윗면 중앙의 안장 모양 오목입니다.',tip:'뇌하수체가 놓이는 오목.'},
+ 'sphenoid-1':{where:'나비뼈의 작은날개 기저부, 눈확 뒤쪽의 시신경 통로입니다.',tip:'시신경이 지나가는 작은 관.'},
+ 'sphenoid-2':{where:'큰날개에 위치하는 구멍으로, 타원구멍보다 앞·안쪽입니다.',tip:'원형구멍 → 타원구멍 → 가시구멍의 배열을 비교.'},
+ 'sphenoid-3':{where:'큰날개에 위치하며 원형구멍보다 뒤·가쪽입니다.',tip:'둥근 원형구멍보다 뒤쪽의 큰 타원형.'},
+ 'sphenoid-4':{where:'큰날개에 위치하며 타원구멍의 뒤·가쪽에 있는 작은 구멍입니다.',tip:'타원구멍 바로 뒤·가쪽.'},
+ 'sphenoid-5':{where:'나비뼈 작은날개와 큰날개 사이의 틈입니다.',tip:'안구 뒤쪽에서 위·가쪽으로 길게 열린 틈.'},
+ 'ethmoid':{where:'코안 천장과 눈확 안쪽벽을 이루는 얇은 뼈입니다.',tip:'미세한 판·구멍은 모형에서 단순화될 수 있어요.'},
+ 'ethmoid-0':{where:'체판 윗면 중앙에서 위로 솟은 볏 모양 돌기입니다.',tip:'벌집뼈 위쪽의 닭볏.'},
+ 'ethmoid-1':{where:'벌집뼈 윗쪽의 구멍이 많은 수평 뼈판입니다.',tip:'닭볏 양옆의 작은 구멍 많은 판.'},
+ 'ethmoid-2':{where:'체판에 분포하는 다수의 아주 작은 구멍입니다.',tip:'개별 구멍은 3D 저해상도 모형에 잘 안 보여요.'},
+ 'ethmoid-3':{where:'체판 중앙 아래에서 코중격 방향으로 내려가는 수직 뼈판입니다.',tip:'닭볏의 아래쪽으로 연결되는 판.'},
+ 'ethmoid-4':{where:'코안 가쪽벽의 윗부분에 위치하는 작은 코선반입니다.',tip:'중간코선반보다 위쪽.'},
+ 'ethmoid-5':{where:'코안 가쪽벽, 위코선반 아래에 위치하는 뼈판입니다.',tip:'위코선반 바로 아래의 큰 선반.'},
+ 'atlas':{where:'첫째 목뼈(C1)로, 몸통이 없는 고리 모양입니다.',tip:'앞·뒤 고리와 가쪽 덩어리.'},
+ 'axis':{where:'둘째 목뼈(C2)로, 위로 솟은 치아돌기가 특징입니다.',tip:'고리뼈 바로 아래.'},
+ 'axis-0':{where:'중쇠뼈(C2) 몸통에서 위로 솟아 고리뼈 안에서 회전 축을 이룹니다.',tip:'C2의 위쪽에서 치아처럼 솟은 돌기.'},
+ 'cervical':{where:'목의 척추뼈이며 앱에서는 대표적으로 다섯째 목뼈(C5)를 보여 줍니다.',tip:'목뼈 가로구멍을 확인하세요.'},
+ 'cervical-0':{where:'목뼈 뒤쪽에서 척추뼈구멍을 둘러싸는 뼈의 고리입니다.',tip:'척추뼈몸통의 뒤쪽에 있는 고리.'},
+ 'cervical-1':{where:'척추뼈몸통과 척추뼈고리 사이의 중앙 큰 구멍입니다.',tip:'척수가 지나는 중앙의 큰 통로.'},
+ 'cervical-2':{where:'목뼈 가로돌기의 좌우에 있는 작은 구멍입니다.',tip:'중앙 척추뼈구멍이 아니라 양옆 구멍.'},
+ 'cervical-3':{where:'인접한 두 척추뼈의 위·아래 척추패임이 만나 형성되는 구멍입니다.',tip:'한 개 뼈가 아니라 이웃한 뼈 사이에 생기는 구멍.'},
+ 'rib':{where:'가슴우리의 양옆을 둘러싸는 길고 굽은 뼈입니다.',tip:'척추뼈와 복장뼈 쪽 연결을 확인하세요.'},
+ 'rib-0':{where:'갈비뼈 아래쪽 안쪽면을 따라 뻗는 고랑입니다.',tip:'갈비뼈의 내면·아래모서리를 보세요.'},
+ 'sternum':{where:'가슴 앞 가운데의 길쭉한 납작뼈입니다.',tip:'복장뼈자루·복장뼈몸통·칼돌기.'},
+ 'sternum-0':{where:'복장뼈자루와 복장뼈몸통이 만나는 가슴 앞쪽의 경계부입니다.',tip:'둘째 갈비연골이 연결되는 높이.'},
+ 'scapula':{where:'등 윗부분의 납작한 삼각형 뼈입니다. 앱은 오른쪽 어깨뼈를 보여 줍니다.',tip:'뒤쪽 면의 가시와 앞쪽 면의 넓은 오목을 구분하세요.'},
+ 'scapula-0':{where:'어깨뼈가시가 가쪽으로 이어져 넓어진 어깨 위쪽의 돌기입니다.',tip:'뒤쪽 가시를 가쪽으로 따라가면 넓은 봉우리.'},
+ 'scapula-1':{where:'어깨뼈 위·앞·가쪽에서 갈고리처럼 앞으로 뻗는 돌기입니다.',tip:'앞쪽에서 볼 때 부리처럼 솟은 돌기.'},
+ 'scapula-2':{where:'어깨뼈 가쪽 모서리 위쪽의 둥근 관절 오목으로 위팔뼈머리와 맞닿습니다.',tip:'가쪽 측면의 관절면.'},
+ 'scapula-3':{where:'어깨뼈 뒤쪽면을 가로지르는 굵은 뼈능선입니다.',tip:'뒤쪽에서 쉽게 보이는 긴 가시.'},
+ 'scapula-4':{where:'어깨뼈 뒤쪽, 어깨뼈가시의 위에 있는 얕은 오목입니다.',tip:'가시 위 = supraspinous.'},
+ 'scapula-5':{where:'어깨뼈 뒤쪽, 어깨뼈가시의 아래에 있는 넓은 오목입니다.',tip:'가시 아래 = infraspinous.'},
+ 'scapula-6':{where:'어깨뼈 앞면, 갈비뼈와 마주하는 넓고 얕은 오목입니다.',tip:'앞쪽(갈비뼈쪽) 넓은 면 전체.'},
+ 'scapula-7':{where:'어깨뼈 위쪽의 안쪽 모서리에서 만나는 꼭짓점입니다.',tip:'위 + 몸통 가까운 쪽.'},
+ 'scapula-8':{where:'어깨뼈 삼각형 아래쪽 끝의 꼭짓점입니다.',tip:'가장 아래쪽의 뾰족한 끝.'},
+ 'scapula-9':{where:'어깨뼈의 척주 가까운 쪽의 긴 모서리입니다.',tip:'안쪽 = 척주 쪽.'},
+ 'scapula-10':{where:'어깨뼈의 겨드랑이 방향 가쪽 모서리입니다.',tip:'가쪽 = 겨드랑이 쪽.'},
+ 'scapula-11':{where:'어깨뼈 위각에서 부리돌기 방향으로 이어지는 위쪽 모서리입니다.',tip:'위쪽의 짧은 모서리.'},
+ 'humerus':{where:'위팔의 긴 뼈로 위쪽은 어깨관절, 아래쪽은 팔꿉관절에 참여합니다.',tip:'몸쪽·먼쪽을 나누어 보세요.'},
+ 'humerus-0':{where:'위팔뼈머리 바로 가쪽에 있는 큰 돌출부입니다.',tip:'어깨 쪽 머리의 가쪽.'},
+ 'humerus-1':{where:'위팔뼈 윗부분의 앞면, 큰결절보다 안쪽에 있습니다.',tip:'머리 옆의 작은 앞쪽 돌출부.'},
+ 'humerus-2':{where:'위팔뼈 몸통의 가쪽 중간 부위에 있는 거친 부착면입니다.',tip:'몸통 중간 가쪽의 거친 자리.'},
+ 'humerus-3':{where:'위팔뼈 아래쪽 가쪽의 둥근 관절면입니다. 노뼈머리와 만납니다.',tip:'팔꿉 바깥쪽 둥근 작은머리.'},
+ 'humerus-4':{where:'위팔뼈 아래쪽 안쪽의 도르래 모양 관절면입니다. 자뼈와 만납니다.',tip:'작은머리보다 안쪽의 도르래.'},
+ 'radius':{where:'아래팔에서 엄지손가락 쪽에 놓인 뼈입니다.',tip:'엄지 쪽 = radius.'},
+ 'radius-0':{where:'노뼈 손목쪽 끝, 엄지 쪽으로 뻗는 돌기입니다.',tip:'손목의 가쪽(엄지 쪽).'},
+ 'ulna':{where:'아래팔에서 새끼손가락 쪽에 놓인 뼈입니다.',tip:'새끼손가락 쪽 = ulna.'},
+ 'ulna-0':{where:'자뼈 손목쪽 끝, 새끼손가락 쪽의 뾰족한 돌기입니다.',tip:'손목의 안쪽(새끼손가락 쪽).'},
+ 'hip':{where:'골반 양쪽의 큰 뼈로 엉덩뼈·궁둥뼈·두덩뼈가 융합됩니다.',tip:'앱은 오른쪽 볼기뼈 하나를 단독 표시해요.'},
+ 'hip-0':{where:'볼기뼈의 넓고 부채꼴처럼 퍼진 윗부분입니다.',tip:'골반 위쪽 넓은 날개.'},
+ 'hip-1':{where:'볼기뼈 뒤·아래쪽 부분으로, 앉을 때 체중을 받는 부위가 있습니다.',tip:'뒤·아래, 앉는 부위.'},
+ 'hip-2':{where:'볼기뼈 앞·아래쪽 부분으로 반대편 두덩뼈와 연결됩니다.',tip:'골반 앞쪽 아래의 뼈.'},
+ 'hip-3':{where:'볼기뼈 가쪽 면의 깊은 관절 오목으로 넙다리뼈머리가 들어갑니다.',tip:'옆에서 보이는 공 모양 관절의 소켓.'},
+ 'hip-4':{where:'엉덩뼈능선의 앞쪽 끝에서 위로 돌출한 뼈가시입니다.',tip:'골반 앞쪽 위에 만져지는 뾰족한 부분.'},
+ 'hip-5':{where:'위앞엉덩뼈가시 바로 아래에 있는 돌출부입니다.',tip:'ASIS 바로 아래 = AIIS.'},
+ 'hip-6':{where:'엉덩뼈 윗부분을 따라 굽어 있는 긴 능선입니다.',tip:'골반 위 가장자리.'},
+ 'femur':{where:'넙다리의 긴 뼈로 위쪽은 엉덩관절에 참여합니다.',tip:'넙다리뼈목과 두 돌기를 구분하세요.'},
+ 'femur-0':{where:'넙다리뼈목 가쪽에 있는 큰 돌기입니다.',tip:'몸통 바깥쪽의 큰 위쪽 돌기.'},
+ 'femur-1':{where:'넙다리뼈목 바로 아래, 뒤·안쪽에 있는 작은 돌기입니다.',tip:'뒤쪽에서 더 잘 보이는 안쪽 돌기.'},
+ 'tibia':{where:'종아리의 안쪽에 위치하는 체중 부하 뼈입니다.',tip:'정강뼈 = 안쪽·굵은 뼈.'},
+ 'tibia-0':{where:'정강뼈 발목쪽 끝의 안쪽으로 뻗는 돌기입니다.',tip:'발목 안쪽 복사.'},
+ 'fibula':{where:'종아리의 가쪽에 위치하는 가느다란 뼈입니다.',tip:'종아리뼈 = 가쪽·가느다란 뼈.'},
+ 'fibula-0':{where:'종아리뼈 발목쪽 끝의 가쪽으로 뻗는 돌기입니다.',tip:'발목 바깥쪽 복사.'},
+ 'calcaneus':{where:'발 뒤꿈치의 큰 발목뼈로 체중을 받는 뒤쪽 발바닥을 이룹니다.',tip:'뒤꿈치의 두툼한 뼈.'}
+};
+const NO_AUTO_PIN=new Set(["cervical-1", "cervical-2", "cervical-3", "ethmoid-0", "ethmoid-1", "ethmoid-2", "ethmoid-3", "ethmoid-4", "ethmoid-5", "occipital-2", "rib-0", "sphenoid-0", "sphenoid-1", "sphenoid-2", "sphenoid-3", "sphenoid-4", "sphenoid-5", "sternum-0", "temporal-0"]);
+const REFERENCES={
+ "scapula":"https://www.ncbi.nlm.nih.gov/books/NBK538319/",
+ "cervical":"https://www.kenhub.com/en/library/anatomy/intervertebral-foramen",
+ "temporal":"https://www.kenhub.com/en/library/anatomy/temporal-bone",
+ "occipital":"https://www.kenhub.com/en/library/anatomy/the-occipital-bone",
+ "sphenoid":"https://www.kenhub.com/en/library/anatomy/the-sphenoid-bone",
+ "ethmoid":"https://www.kenhub.com/en/library/anatomy/the-ethmoid-bone",
+ "atlas":"https://www.kenhub.com/en/library/anatomy/atlas",
+ "humerus":"https://www.kenhub.com/en/library/anatomy/the-humerus",
+ "radius":"https://www.kenhub.com/en/library/anatomy/the-radius-and-the-ulna",
+ "ulna":"https://www.kenhub.com/en/library/anatomy/the-radius-and-the-ulna",
+ "hip":"https://www.kenhub.com/en/library/anatomy/hip-bone",
+ "femur":"https://www.kenhub.com/en/library/anatomy/femur",
+ "calcaneus":"https://www.kenhub.com/en/library/anatomy/calcaneus"
+};
+const ITEMS=G.flatMap(g=>[{id:g.id,en:g.en,ko:g.ko,area:g.area,parent:g.id,isBone:true,alias:g.alias||''},...g.sub.map((s,i)=>({id:g.id+'-'+i,en:s[0],ko:s[1],area:g.area,parent:g.id,isBone:false,alias:s[2]||''}))]);
+const $=id=>document.getElementById(id);const T=id=>ITEMS.find(x=>x.id===id);let state={tab:'explore',region:'전체',selection:'scapula-0',view:'solo',hidden:false,qmode:'typing',question:null,questions:[],qpos:0,quizWrongOnly:false,answered:false,pinMode:false};const SKEY='bone-lab-3d-v3';let saved;try{saved=JSON.parse(localStorage.getItem(SKEY))||{}}catch(e){saved={}}saved.learned||=[];saved.wrong||=[];saved.bookmarks||=[];saved.pins||={};const store=()=>{try{localStorage.setItem(SKEY,JSON.stringify(saved))}catch(e){}};const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let modelAdapter=null;const areas=['전체','머리뼈','척주·가슴우리','어깨·팔','골반','다리·발'];
+function setup(){
+ $('regionbar').innerHTML=areas.map(a=>`<button class="chip ${a==='전체'?'on':''}" data-region="${esc(a)}">${a}</button>`).join('');
+ document.querySelectorAll('[data-region]').forEach(b=>b.onclick=()=>{state.region=b.dataset.region;const selectedG=G.find(g=>g.id===T(state.selection)?.parent);if(state.region!=='전체'&&selectedG?.area!==state.region)selectTerm(G.find(g=>g.area===state.region)?.id||'scapula');else renderTerms();document.querySelectorAll('[data-region]').forEach(x=>x.classList.toggle('on',x.dataset.region===state.region));});
+ $('search').oninput=renderTerms;
+ $('bone-select').onchange=e=>{state.region='전체';document.querySelectorAll('[data-region]').forEach(x=>x.classList.toggle('on',x.dataset.region==='전체'));$('search').value='';selectTerm(e.target.value);};
+ document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>setView(b.dataset.view));
+ document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));
+ $('whole-mode').onclick=()=>setView('whole');$('near-mode').onclick=()=>setView('near');$('detail-mode').onclick=()=>setView('solo');$('prev-bone').onclick=()=>stepBone(-1);$('next-bone').onclick=()=>stepBone(1);
+ $('prev-structure').onclick=()=>stepStructure(-1);$('next-structure').onclick=()=>stepStructure(1);
+ $('hide-en').onchange=e=>{state.hidden=e.target.checked;showDetails();};$('reveal-en').onclick=()=>{state.hidden=false;$('hide-en').checked=false;showDetails();};
+ $('learned').onclick=()=>{const id=state.selection; if(saved.learned.includes(id))saved.learned=saved.learned.filter(x=>x!==id);else saved.learned.push(id);store();showDetails();renderTerms();renderStats();};
+ $('bookmark').onclick=()=>{const id=state.selection;if(saved.bookmarks.includes(id))saved.bookmarks=saved.bookmarks.filter(x=>x!==id);else saved.bookmarks.push(id);store();showDetails();};
+ $('reset-pin').onclick=()=>{delete saved.pins[state.selection];store();showDetails();updatePinStatus();if(modelAdapter)modelAdapter.refreshPin(state.selection);};
+ $('set-pin').onclick=()=>{if(!modelAdapter){$('pin-note').textContent='3D 모델이 연결된 후 사용할 수 있어요.';return}if(state.view==='whole'){setView('solo')}
+   state.pinMode=!state.pinMode;$('set-pin').textContent=state.pinMode?'취소 · 선택한 뼈에 핀 찍기':'✎ 내가 직접 위치 핀 찍기';$('pin-note').textContent=state.pinMode?'모형의 해당 뼈를 클릭하세요. 이 핀은 사용자 표시이며 검증된 해부학 정보가 아닙니다.':'추정 핀은 참고용입니다. 본인만의 암기 기준으로 위치를 직접 찍을 수 있어요.';};
+ document.querySelectorAll('[data-qmode]').forEach(b=>b.onclick=()=>{state.qmode=b.dataset.qmode;state.quizWrongOnly=false;makeQuiz();});
+ $('grade').onclick=gradeTyping;$('answer').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();state.answered?nextQ():gradeTyping()}});
+ $('show-answer').onclick=()=>{if(!state.question)return;$('q-feedback').className='feedback';$('q-feedback').textContent='정답: '+state.question.en;state.answered=true;};
+ $('next').onclick=nextQ;$('retry').onclick=()=>{state.quizWrongOnly=true;setTab('test');makeQuiz();};$('clear-wrong').onclick=()=>{saved.wrong=[];store();renderWrong();renderStats();};
+ ['front','back','side','zoom-in','zoom-out'].forEach(id=>$(id).onclick=()=>{if(modelAdapter)modelAdapter.action(id);});
+ $('home').onclick=()=>setView('whole');
+ setTab('explore');selectTerm(T(saved.lastSelection)?saved.lastSelection:'scapula-0');renderStats();updatePinStatus();
+}
+function setView(view){if(!['whole','near','solo'].includes(view))return;state.view=view;state.pinMode=false;$('set-pin').textContent='✎ 내가 직접 위치 핀 찍기';updateView();}
+function stepBone(d){const t=T(state.selection),idx=G.findIndex(g=>g.id===t?.parent);selectTerm(G[(idx+d+G.length)%G.length].id);}
+function stepStructure(d){const t=T(state.selection);if(!t)return;const g=G.find(x=>x.id===t.parent);const ids=g.sub.map((_,i)=>g.id+'-'+i);if(!ids.length){const j=G.findIndex(x=>x.id===g.id);selectTerm(G[(j+d+G.length)%G.length].id);return;}const ix=ids.indexOf(t.id);if(ix<0){selectTerm(ids[d>0?0:ids.length-1]);return;}selectTerm(ids[(ix+d+ids.length)%ids.length]);}
+function setTab(tab){state.tab=tab;document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('on',b.dataset.tab===tab));['explore','test','mistakes'].forEach(x=>$(x+'-panel').classList.toggle('none',x!==tab));if(tab==='test')makeQuiz();if(tab==='mistakes')renderWrong();if(tab==='explore')updateView();}
+function renderTerms(){
+ const current=T(state.selection);const active=G.find(g=>g.id===current?.parent)||G.find(g=>g.id==='scapula');
+ const options=G.filter(g=>state.region==='전체'||g.area===state.region);
+ $('bone-select').innerHTML=options.map(g=>`<option value="${g.id}">${esc(g.en)} · ${esc(g.ko)}</option>`).join('');
+ if(options.some(g=>g.id===active.id))$('bone-select').value=active.id;
+ else $('bone-select').selectedIndex=0;
+ const q=$('search').value.trim().toLowerCase();
+ let list;
+ if(q){list=ITEMS.filter(t=>[t.en,t.ko,t.alias,G.find(g=>g.id===t.parent)?.en].join(' ').toLowerCase().includes(q));
+  $('bone-caption').textContent=`검색 결과 ${list.length}개 · 선택하면 해당 뼈만 보여요.`;
+ }else{
+  list=ITEMS.filter(t=>t.parent===active.id);
+  $('bone-caption').textContent=`${active.en} · 세부 구조 ${active.sub.length}개 · 순서대로 외우기`;
+ }
+ let last='',html='';
+ for(const t of list){
+  if(q&&t.parent!==last){last=t.parent;const gr=G.find(g=>g.id===t.parent);html+=`<div class="grouphead">${esc(gr.en.toUpperCase())}</div>`;}
+  const pos=t.isBone?'B':String(Number(t.id.split('-').pop())+1).padStart(2,'0');
+  html+=`<button class="term ${t.isBone?'is-bone':'is-sub'} ${state.selection===t.id?'on':''}" data-term="${esc(t.id)}"><span class="term-index">${pos}</span><span style="flex:1;min-width:0"><div class="term-name">${esc(t.en)}</div><div class="term-sub">${esc(t.ko)}</div></span>${saved.learned.includes(t.id)?'<span class="done-dot">✓</span>':''}</button>`;
+ }
+ $('terms').innerHTML=html||'<div class="empty">해당 용어가 없습니다.</div>';
+ document.querySelectorAll('[data-term]').forEach(b=>b.onclick=()=>selectTerm(b.dataset.term));
+}
+function selectTerm(id){if(!T(id))return;const group=G.find(x=>x.id===T(id).parent);if(state.region!=='전체'&&state.region!==group?.area){state.region='전체';document.querySelectorAll('[data-region]').forEach(x=>x.classList.toggle('on',x.dataset.region==='전체'));}state.view='solo';state.selection=id;state.pinMode=false;saved.lastSelection=id;store();
+ $('set-pin').textContent='✎ 내가 직접 위치 핀 찍기';showDetails();renderTerms();updateView();}
+function showDetails(){
+ let t=T(state.selection),g=G.find(g=>g.id===t.parent),detail=ANATOMY[t.id]||ANATOMY[g.id];
+ $('detail-name').textContent=state.hidden?'••••••••':t.en;
+ $('detail-ko').textContent=t.ko;
+ $('parent-name').textContent=t.area+' · '+g.en;
+ $('structure-pos').textContent=t.isBone?`BONE · ${g.en}`:`STRUCTURE ${String(+t.id.split('-').pop()+1).padStart(2,'0')} / ${String(g.sub.length).padStart(2,'0')}`;
+ $('location-note').textContent=detail?.where||`${g.en}에서 ${t.ko}의 위치를 찾으세요.`;
+ $('memory-note').textContent=detail?.tip||'뼈를 돌려가며 모양과 방향을 확인하세요.';
+ const ref=$('source-link');if(ref){ref.hidden=!REFERENCES[g.id];if(REFERENCES[g.id])ref.href=REFERENCES[g.id];}
+ $('learned').textContent=saved.learned.includes(t.id)?'✓ 익힘 완료 · 취소':'✓ 이 부위를 익혔어요';
+ $('bookmark').textContent=saved.bookmarks.includes(t.id)?'★ 저장됨':'☆ 저장';
+ $('pin-note').textContent=saved.pins[t.id]?'● 내가 직접 찍은 위치 핀입니다. 임상적 정확성이 검증된 표시는 아닙니다.':NO_AUTO_PIN.has(t.id)?'작은 구멍·틈새이거나 뼈 사이 구조라 자동 핀을 표시하지 않습니다. 설명과 교재 그림을 대조하세요.':'주황색 핀은 추정 지점을 가리키는 참고 표시이며 정확한 해부학적 위치가 아닙니다.';
+ $('prev-structure').disabled=false;$('next-structure').disabled=false;$('prev-structure').textContent=g.sub.length?'← 이전 부위':'← 이전 뼈';$('next-structure').textContent=g.sub.length?'다음 부위 →':'다음 뼈 →';
+ $('set-pin').disabled=t.isBone||t.id==='cervical-3';
+ updatePinStatus();
+}
+function updatePinStatus(){
+ const t=T(state.selection);if(!t)return;
+ const g=G.find(x=>x.id===t.parent);const manual=!!saved.pins[t.id];const status=$('pin-status');
+ status.classList.toggle('warning',!manual&&(!t.isBone));
+ if(manual)status.textContent='● 내가 저장한 위치 핀 · 다른 기기에서는 공유되지 않습니다.';
+ else if(t.isBone)status.textContent='● 전체 뼈의 실제 3D 형상을 표시합니다. 해당 뼈만 보려면 “이 뼈만”을 선택하세요.';
+ else if(NO_AUTO_PIN.has(t.id))status.textContent='⚠ 정확한 표면 핀을 제공하지 않습니다. 작은 구멍·틈새·뼈 사이 구조는 이 3D 자료에서 확인하기 어렵습니다.';
+ else status.textContent='◌ 주황색은 자동 추정 위치입니다. 위치가 확실한 정밀 마커가 아닙니다. 설명과 실습 모형으로 재확인하세요.';
+ if(modelAdapter?.groupExists&&!modelAdapter.groupExists(g)){status.classList.add('warning');status.textContent='⚠ 현재 3D 모델에서 이 뼈의 이름을 연결하지 못했습니다. 용어는 계속 학습할 수 있어요.';}
+ $('reset-pin').disabled=!manual;
+}
+function renderStats(){$('header-count').textContent=`${saved.learned.length} / ${ITEMS.length} learned`;$('learn-progress').textContent=`${saved.learned.length} / ${ITEMS.length}`;$('progress-bar').style.width=(saved.learned.length/ITEMS.length*100)+'%';$('wrong-count').textContent=saved.wrong.length;}
+function updateView(){
+ let t=T(state.selection),g=G.find(x=>x.id===t.parent);
+ $('scene-title').textContent=state.view==='whole'?'Whole skeleton':`${g.en}`;
+ $('scene-sub').textContent=state.view==='whole'?`${g.en} · 전신에서 위치 보기`:state.view==='near'?`${t.en} · 주변 뼈와 비교`:`${t.en} · 뼈 단독 3D`;
+ $('whole-mode').classList.toggle('on',state.view==='whole');$('near-mode').classList.toggle('on',state.view==='near');$('detail-mode').classList.toggle('on',state.view==='solo');
+ document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('on',b.dataset.view===state.view));
+ $('current-model-bone').textContent=`${g.en} · ${modelAdapter?'3D 전환 확인 중':'3D 불러오는 중'}`;
+ if(modelAdapter)modelAdapter.focus(g,state.view,t.id);
+ updatePinStatus();
+}
+function modelShown({group,view,meshNames=[],error=''}){
+ const badge=$('current-model-bone'),problem=$('model-problem'),title=$('model-problem-title'),note=$('model-problem-note');
+ const selected=group?.en||'전신 뼈대';
+ if(error){badge.textContent=`⚠ ${selected} · 3D 미확인`;title.textContent=`${selected} 모형을 표시할 수 없습니다.`;
+  note.textContent=error+' 다른 뼈(어깨뼈 등)를 대신 보여주지 않습니다.';problem.hidden=false;
+  $('model-state').textContent='3D 연결 확인 필요';return;}
+ problem.hidden=true;
+ const names=meshNames.join(' + ');
+ badge.textContent=view==='whole'?`전신 3D · ${meshNames.length}개 뼈`: `${selected} ✓ ${names||'이름 확인됨'}`;
+ $('model-state').textContent='● 3D 모형 연결됨';
+}
+function renderWrong(){let list=saved.wrong.map(T).filter(Boolean);$('wrong-count').textContent=list.length;$('wrong-list').innerHTML=list.length?list.map(t=>`<button class="term" data-wrong="${t.id}"><span class="term-index">!</span><span><div class="term-name">${esc(t.en)}</div><div class="term-sub">${esc(t.ko)}</div></span></button>`).join(''):'<div class="empty">아직 오답이 없어요. 🎉<br>시험을 보면 틀린 용어가 여기에 모입니다.</div>';document.querySelectorAll('[data-wrong]').forEach(b=>b.onclick=()=>{setTab('explore');selectTerm(b.dataset.wrong)});$('retry').disabled=!list.length;}
+const shuffle=arr=>{let a=arr.slice();for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+function makeQuiz(){document.querySelectorAll('[data-qmode]').forEach(b=>b.classList.toggle('on',b.dataset.qmode===state.qmode));const base=state.quizWrongOnly?ITEMS.filter(t=>saved.wrong.includes(t.id)):ITEMS;state.questions=shuffle(base.filter(t=>state.qmode==='typing'||t.isBone));state.qpos=0;displayQ();}
+function displayQ(){let q=state.questions[state.qpos];state.question=q||null;state.answered=false;$('q-feedback').textContent='';$('q-feedback').className='feedback';$('typing-ui').classList.toggle('none',state.qmode!=='typing');$('finding-ui').classList.toggle('none',state.qmode!=='finding');$('answer').value='';$('qnum').textContent=`QUESTION ${String(state.qpos+1).padStart(2,'0')} / ${state.questions.length}`;if(!q){$('q-ko').textContent='No questions';$('q-prompt').textContent='학습하거나 오답을 쌓은 다음 다시 시험을 시작하세요.';$('grade').disabled=true;return;}$('grade').disabled=false;$('q-ko').textContent=state.qmode==='typing'?q.ko:q.en;$('q-prompt').textContent=state.qmode==='typing'?`3D: ${G.find(g=>g.id===q.parent).en} · 영어 풀네임을 쓰세요.`:'3D에서 해당 뼈의 위치를 클릭하세요.';if(modelAdapter){if(state.qmode==='typing')modelAdapter.focus(G.find(g=>g.id===q.parent),'solo',q.id,true);else modelAdapter.focus(null,'whole',null,true);}}
+const norm=s=>String(s||'').toLowerCase().replace(/[^a-z]/g,'');
+function record(q,right){if(right){saved.wrong=saved.wrong.filter(x=>x!==q.id);if(!saved.learned.includes(q.id))saved.learned.push(q.id)}else if(!saved.wrong.includes(q.id))saved.wrong.push(q.id);store();renderStats();renderTerms();}
+function gradeTyping(){let q=state.question;if(!q||state.answered)return;let value=$('answer').value;if(!value.trim()){ $('q-feedback').textContent='영어 명칭을 입력해 주세요.';return;}let ok=norm(q.en)===norm(value);record(q,ok);state.answered=true;$('q-feedback').className='feedback '+(ok?'ok':'bad');$('q-feedback').textContent=ok?'✓ Correct!':`✕ 정답: ${q.en}`;}
+function nextQ(){if(!state.questions.length)return;state.qpos=(state.qpos+1)%state.questions.length;displayQ();}
+window.boneApp={state,G,T,GUIDE,NO_AUTO_PIN,selectTerm,modelShown,modelClick(meshName,point,mesh){if(state.pinMode){const t=T(state.selection);const g=G.find(g=>g.id===t.parent);if(!modelAdapter.isGroupMesh(mesh,g)){$('pin-note').textContent='선택한 뼈가 아닌 다른 뼈를 클릭했어요. 밝게 표시된 뼈를 클릭하세요.';return}let local=mesh.worldToLocal(point.clone());saved.pins[t.id]={mesh:mesh.name,p:[local.x,local.y,local.z]};store();state.pinMode=false;$('set-pin').textContent='✎ 내가 직접 위치 핀 찍기';$('pin-note').textContent='✓ 내가 찍은 위치를 저장했어요. 해부학적으로 검증된 표시는 아닙니다.';modelAdapter.refreshPin(t.id);updatePinStatus();return;}if(state.tab==='test'&&state.qmode==='finding'&&state.question&&!state.answered){let correct=modelAdapter.isGroupMesh(mesh,G.find(g=>g.id===state.question.parent));record(state.question,correct);state.answered=true;$('q-feedback').className='feedback '+(correct?'ok':'bad');$('q-feedback').textContent=correct?'✓ Correct!':`✕ 정답: ${state.question.en}`;return;}if(state.tab==='explore'&&state.view==='whole'){let group=G.find(g=>modelAdapter.isGroupMesh(mesh,g));if(group)selectTerm(group.id);}},modelReady(adapter){modelAdapter=adapter;$('loading').classList.add('off');$('model-state').textContent='● 3D ready';$('model-state').style.color='#d6ecb0';updateView();updatePinStatus();if(state.tab==='test')displayQ();},modelProgress(p){$('loadbar').style.width=Math.min(100,p)+'%'},modelError(e){$('loading-msg').textContent='3D 파일 연결에 실패했습니다. 인터넷 연결을 확인해 주세요. 영어 용어 암기 기능은 계속 사용할 수 있어요.';$('current-model-bone').textContent='⚠ 3D 파일 연결 실패';$('model-fallback').style.display='block';$('model-state').textContent='3D offline';$('model-problem').hidden=false;$('model-problem-title').textContent='3D 모델 연결에 실패했습니다.';$('model-problem-note').textContent='다른 뼈를 대신 표시하지 않습니다. 인터넷 연결 후 파일을 새로 열어 주세요.';console.warn(e);}};setup();
+</script>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {MeshoptDecoder} from 'three/addons/libs/meshopt_decoder.module.js';
+const app=window.boneApp,holder=document.getElementById('viewport'),markerLayer=document.getElementById('landmark-layer');
+let width=holder.clientWidth||800,height=holder.clientHeight||600;
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(37,width/height,.01,100);
+const homePos=new THREE.Vector3(1.4,1.10,3.65),homeTarget=new THREE.Vector3(0,.92,0);
+camera.position.copy(homePos);
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));renderer.setSize(width,height);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.55;holder.appendChild(renderer.domElement);
+scene.add(new THREE.HemisphereLight(0xfff3e0,0x344b55,2.4));
+let key=new THREE.DirectionalLight(0xffffff,2.3);key.position.set(3,4,6);scene.add(key);
+let rim=new THREE.DirectionalLight(0xb9e6ff,1.15);rim.position.set(-2,2,-4);scene.add(rim);
+const controls=new OrbitControls(camera,renderer.domElement);controls.target.copy(homeTarget);controls.enableDamping=true;controls.dampingFactor=.075;controls.minDistance=.08;controls.maxDistance=12;
+const bones=[],boneByName=new Map();let model=null,activeGroup=null,activeId=null,focusMeshes=[],flight=null,modelReady=false,selectedMarker=null;
+const normalMat=new THREE.MeshStandardMaterial({color:0xebe5d9,roughness:.73});
+const ghostMat=new THREE.MeshStandardMaterial({color:0x91a4a7,roughness:.9,transparent:true,opacity:.12,depthWrite:false,side:THREE.DoubleSide});
+const pickMat=new THREE.MeshStandardMaterial({color:0xe1ecbc,roughness:.62,emissive:0x334b2b,emissiveIntensity:.18,side:THREE.DoubleSide});
+const ray=new THREE.Raycaster(),mouse=new THREE.Vector2();
+const labelOf=m=>String(m.userData?.name||m.name||'').trim().replaceAll('_',' ');
+const canon=s=>String(s||'').toLowerCase().replace(/[^a-z0-9]/g,'');
+// Names verified against the 634-entry upstream ecorche.structures.json.
+// A missing source mesh is a loading/mapping error, never a reason to show the scapula instead.
+const SOURCE_BONE_NAMES={
+ temporal:['Right temporal bone'],occipital:['Occipital bone'],sphenoid:['Sphenoid bone'],
+ ethmoid:['Ethmoid'],atlas:['Atlas'],axis:['Axis'],cervical:['Fifth cervical vertebra'],
+ rib:['Right fifth rib'],sternum:['Manubrium','Body of sternum','Xiphoid process'],
+ scapula:['Right scapula'],humerus:['Right humerus'],radius:['Right radius'],
+ ulna:['Right ulna'],hip:['Right hip bone'],femur:['Right femur'],tibia:['Right tibia'],
+ fibula:['Right fibula'],calcaneus:['Right calcaneus']
+};
+const mappedBoneGroups=new Map();
+function groupMeshes(group){
+ if(!group)return [];
+ if(mappedBoneGroups.has(group.id))return mappedBoneGroups.get(group.id);
+ const wanted=new Set((SOURCE_BONE_NAMES[group.id]||[]).map(canon));
+ const actual=bones.filter(m=>wanted.has(canon(labelOf(m))));
+ mappedBoneGroups.set(group.id,actual);
+ return actual;
+}
+function isGroupMesh(mesh,group){return groupMeshes(group).includes(mesh);}
+function groupExists(g){return groupMeshes(g).length>0;}
+function tween(pos,target){flight={fromP:camera.position.clone(),toP:pos,fromT:controls.target.clone(),toT:target,start:performance.now()};}
+function bbox(m){return new THREE.Box3().setFromObject(m);}
+function focusBbox(ms){const b=new THREE.Box3();for(const m of ms)b.expandByObject(m);return b;}
+function guideConfig(id){return window.boneApp.GUIDE[id]||null;}
+const RIGHT_BONES=new Set(['temporal','rib','scapula','humerus','radius','ulna','hip','femur','tibia','fibula']);
+function viewDirection(view,center){
+ switch(view){case 'back':return new THREE.Vector3(.12,.10,-1).normalize();
+ case 'front':return new THREE.Vector3(.12,.08,1).normalize();
+ case 'side':return new THREE.Vector3(center.x>=0?1:-1,.08,.2).normalize();
+ case 'bottom':return new THREE.Vector3(.16,-1,.12).normalize();
+ case 'top':return new THREE.Vector3(.15,1,.15).normalize();
+ default:return new THREE.Vector3(center.x>=0?.46:-.46,.20,1).normalize();}
+}
+// A guide pin points at a vertex ON the chosen bone, never at an empty coordinate.
+// Normalized positional guides are educational approximations, NOT verified precise foramina locations.
+function guidePoint(id,meshes){
+ if(!meshes.length)return null;
+ const cfg=guideConfig(id),feature=(cfg?.u||[.5,.5,.5]).slice();
+ // Source mesh is viewed from +Z; the RIGHT half of the subject is world -X.
+ // The original normalized hints mistakenly treated right lateral as +X.
+ const parent=window.boneApp.T(id)?.parent; if(RIGHT_BONES.has(parent))feature[0]=1-feature[0];
+ let best=null,bestScore=Infinity;
+ for(const mesh of meshes){
+  const b=bbox(mesh),min=b.min,max=b.max;
+  const target=new THREE.Vector3(min.x+(max.x-min.x)*feature[0],min.y+(max.y-min.y)*feature[1],min.z+(max.z-min.z)*feature[2]);
+  // Pin the actual visible geometry, using a weighted nearest-vertex search.
+  const pos=mesh.geometry.getAttribute('position');
+  if(!pos)continue;
+  const point=new THREE.Vector3(),world=new THREE.Vector3();
+  const stride=Math.max(1,Math.floor(pos.count/22000));
+  for(let i=0;i<pos.count;i+=stride){
+   point.fromBufferAttribute(pos,i);world.copy(point).applyMatrix4(mesh.matrixWorld);
+   const dx=(world.x-target.x)/(Math.max(.012,max.x-min.x));
+   const dy=(world.y-target.y)/(Math.max(.012,max.y-min.y));
+   const dz=(world.z-target.z)/(Math.max(.012,max.z-min.z));
+   const score=dx*dx+dy*dy+dz*dz;
+   if(score<bestScore){bestScore=score;best=world.clone();}
+  }
+ }
+ return best;
+}
+function refreshPin(id,testing){
+ selectedMarker=null;markerLayer.replaceChildren();
+ if(testing||!id||!modelReady)return;
+ const t=app.T(id),g=app.G.find(x=>x.id===t?.parent);
+ if(!t||!g||t.isBone)return;  // bone selection uses colored mesh, not a misleading central dot
+ const selected=groupMeshes(g);if(!selected.length)return;
+ let storage={};try{storage=JSON.parse(localStorage.getItem('bone-lab-3d-v3')||'{}')}catch(e){}
+ const custom=storage?.pins?.[id];let point=null;
+ if(custom){let m=boneByName.get(custom.mesh);if(m&&Array.isArray(custom.p)&&selected.includes(m))point=m.localToWorld(new THREE.Vector3(...custom.p));}
+ if(!point&&!(window.boneApp.NO_AUTO_PIN.has(id)))point=guidePoint(id,selected);
+ if(!point)return;
+ selectedMarker={point,id,manual:!!custom};
+ const wrap=document.createElement('div');wrap.className='landmark-callout '+(custom?'is-manual':'is-auto is-unverified');
+ const name=document.createElement('div');name.className='landmark-name';name.textContent=t.en;
+ const ko=document.createElement('span');ko.className='landmark-korean';ko.textContent=t.ko;
+ name.appendChild(ko);
+ const stem=document.createElement('div');stem.className='landmark-line';
+ const dot=document.createElement('div');dot.className='landmark-dot';
+ wrap.append(name,stem,dot);markerLayer.appendChild(wrap);selectedMarker.element=wrap;
+ placeMarker();
+}
+function placeMarker(){
+ if(!selectedMarker?.element)return;
+ const world=selectedMarker.point;const v=world.clone().project(camera);
+ const w=holder.clientWidth,h=holder.clientHeight;
+ const x=(v.x+1)*w/2,y=(1-v.y)*h/2;
+ if(!w||!h||v.z>1||v.z< -1||x<55||x>w-55||y<126||y>h-32){selectedMarker.element.style.display='none';return;}
+ // If the pin is on the far face of the bone, do not display a floating 'front' label.
+ const to=world.clone().sub(camera.position),dist=to.length();
+ if(dist>.03){const los=new THREE.Raycaster(camera.position,to.normalize(),.01,dist-.006);
+  const occluded=los.intersectObjects(bones.filter(m=>m.visible&&m.material!==ghostMat),false).length>0;
+  if(occluded){selectedMarker.element.style.display='none';return;}
+ }
+ selectedMarker.element.style.display='flex';
+ selectedMarker.element.style.left=x+'px';selectedMarker.element.style.top=y+'px';
+}
+function focus(g,view,id,testing=false){
+ activeGroup=g;activeId=id;
+ const solo=view==='solo',whole=view==='whole',near=view==='near';
+ focusMeshes=g?groupMeshes(g):[];
+ // A foramen between vertebrae needs two adjacent vertebrae in the same scene.
+ if(id==='cervical-3'&&solo){
+  const pair=bones.filter(m=>['fourthcervicalvertebra','fifthcervicalvertebra'].includes(canon(labelOf(m))));
+  if(pair.length===2)focusMeshes=pair;
+ }
+ // Every switch hides the previous selected shape. Never show a stale scapula.
+ for(const m of bones){m.visible=false;m.material=normalMat;}
+ if(whole){
+  for(const m of bones){m.visible=true;m.material=normalMat;}
+  refreshPin(null,true);app.modelShown({group:g,view,meshNames:bones.map(labelOf)});
+  tween(homePos.clone(),homeTarget.clone());return;
+ }
+ if(!focusMeshes.length){
+  refreshPin(null,true);
+  app.modelShown({group:g,view,error:'원본 파일에서 해당 이름의 3D 뼈를 찾지 못했습니다.'});return;
+ }
+ const selected=new Set(focusMeshes);
+ for(const m of bones){m.visible=near||selected.has(m);m.material=selected.has(m)?pickMat:(near?ghostMat:normalMat);}
+ // Keep the list of displayed bone names linked to meshes actually rendered.
+ const selectedVisible=bones.filter(m=>m.visible&&selected.has(m));
+ if(selectedVisible.length!==focusMeshes.length){
+  refreshPin(null,true);app.modelShown({group:g,view,error:'선택된 모형과 화면 표시가 일치하지 않습니다.'});return;
+ }
+ const b=focusBbox(focusMeshes),center=b.getCenter(new THREE.Vector3());
+ const cfg=guideConfig(id),dir=viewDirection(cfg?.view,center);
+ const size=b.getSize(new THREE.Vector3()),radius=Math.max(.023,size.length()*.5);
+ const dist=Math.max(.14,radius*(near?4.25:3.15));
+ tween(center.clone().addScaledVector(dir,dist),center.clone());
+ app.modelShown({group:g,view,meshNames:selectedVisible.map(labelOf)});
+ refreshPin(id,testing);
+}
+function action(id){
+ if(id==='home'){tween(homePos.clone(),homeTarget.clone());return;}
+ if(id==='front'||id==='back'||id==='side'){
+   const distance=camera.position.distanceTo(controls.target);
+   const dir=id==='side'?new THREE.Vector3(controls.target.x>=0?1:-1,0,0):new THREE.Vector3(0,0,id==='front'?1:-1);
+   tween(controls.target.clone().addScaledVector(dir,distance),controls.target.clone());return;
+  }
+ const v=camera.position.clone().sub(controls.target);v.multiplyScalar(id==='zoom-in'?.74:1.35);camera.position.copy(controls.target).add(v);
+}
+let down=null;
+renderer.domElement.addEventListener('pointerdown',e=>down={x:e.clientX,y:e.clientY});
+renderer.domElement.addEventListener('pointerup',e=>{
+ if(!down||Math.hypot(down.x-e.clientX,down.y-e.clientY)>9){down=null;return;}down=null;
+ const rect=renderer.domElement.getBoundingClientRect();
+ mouse.set(((e.clientX-rect.left)/rect.width)*2-1,-((e.clientY-rect.top)/rect.height)*2+1);ray.setFromCamera(mouse,camera);
+ // If user is placing a pin, ignore other bones/transparent meshes. Otherwise only raycast selected/highlighted group in study view.
+ const isPinMode=app.state.pinMode;
+ const candidates=isPinMode&&activeGroup?groupMeshes(activeGroup).filter(m=>m.visible):bones.filter(m=>m.visible);
+ const hit=ray.intersectObjects(candidates,false)[0];
+ if(hit)app.modelClick(labelOf(hit.object),hit.point,hit.object);
+});
+const resize=new ResizeObserver(()=>{let w=holder.clientWidth,h=holder.clientHeight;if(w&&h){camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h);placeMarker();}});resize.observe(holder);
+function tick(now){requestAnimationFrame(tick);
+ if(flight){let t=Math.min(1,(now-flight.start)/640),u=1-Math.pow(1-t,3);camera.position.lerpVectors(flight.fromP,flight.toP,u);controls.target.lerpVectors(flight.fromT,flight.toT,u);if(t>=1)flight=null;}
+ controls.update();placeMarker();renderer.render(scene,camera);
+}
+requestAnimationFrame(tick);
+const loader=new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
+const urls=[
+ 'https://charleeh.github.io/ecorche/model/ecorche.meshopt.glb',
+ 'https://cdn.jsdelivr.net/gh/Charleeh/ecorche@main/model/ecorche.meshopt.glb',
+ 'https://raw.githubusercontent.com/Charleeh/ecorche/main/model/ecorche.meshopt.glb',
+ 'https://charleeh.github.io/ecorche/model/ecorche.glb'
+];
+function loadModel(n=0){if(n>=urls.length){app.modelError('all model URLs failed');return;}
+ loader.load(urls[n],gltf=>{
+  model=gltf.scene;scene.add(model);model.updateMatrixWorld(true);
+  model.traverse(o=>{
+   if(o.isMesh){
+    if(o.userData?.layer==='skeleton'&&o.userData?.tissue==='bone'){
+     o.material=normalMat;bones.push(o);
+     boneByName.set(o.name,o);boneByName.set(labelOf(o),o);
+    }else o.visible=false;
+   }
+  });
+  if(!bones.length){app.modelError('bone meshes missing');return;}
+  modelReady=true;
+  const missing=app.G.filter(g=>groupMeshes(g).length===0);
+  if(missing.length)console.warn('Unmatched bone groups:',missing.map(x=>x.en));
+   console.info('[BONE LAB v4] recognized groups:',app.G.length-missing.length,'/',app.G.length,
+     'available named bone meshes:',bones.length);
+
+  app.modelReady({focus,action,isGroupMesh,refreshPin,groupExists});
+ },e=>{if(e.total)app.modelProgress(Math.round(e.loaded/e.total*100));else app.modelProgress(Math.min(92,Math.floor(e.loaded/60000)));},err=>{console.warn('Model endpoint failed',urls[n],err);loadModel(n+1);});
+}
+loadModel();
+</script>
+</body>
+</html>
